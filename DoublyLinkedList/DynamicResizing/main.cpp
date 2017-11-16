@@ -40,6 +40,10 @@ int main(int argc, char** argv) {
     LList<Int*> L2(15);
     LList<Int> L3;
 
+    // 4. Call print functions
+    linkedList.printList();
+    linkedList.printListBackward();
+
     return 0;
 }
 
