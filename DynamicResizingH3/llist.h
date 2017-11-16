@@ -10,20 +10,20 @@
 #define llist_h
 
 // This is the file to include in your code if you want access to the
-// complete DList template class
+// complete DList template class (update singly linked)
 
 // First, get the declaration for the base list class
 #include "list.h"
 
-// This is the declaration for LList. It is split into two parts
-// because it is too big to fit on one book page
+// This is the declaration for LList. It is broken up because the
+// methods that appear in the book are in a separate file.
 // Linked list implementation
 template <typename E> class LList: public List<E> {
 private:
-    Link<E>* head;       // Pointer to list header
-    Link<E>* tail;       // Pointer to last element
-    Link<E>* curr;       // Access to current element
-    int cnt;             // Size of list
+    Link<E>* head;      // Pointer to list header
+    Link<E>* tail;      // Pointer to list tail
+    Link<E>* curr;      // Pointer current element
+    int cnt;            // Size of list
 
     void init() {        // Initialization helper method
         curr = tail = head = new Link<E>;
