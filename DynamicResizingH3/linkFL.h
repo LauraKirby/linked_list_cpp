@@ -9,13 +9,13 @@
 #ifndef linkFL_h
 #define linkFL_h
 
-// Doubly linked list node with freelist support
+// Doubly linked list node with freelist support (doubly 2)
 template <typename E> class Link {
 private:
     static Link<E>* freelist;       // Reference to freelist head
 
 public:
-    E element;      // Value for this node
+    E element;      // Value for this node - 2
     Link* next;     // Pointer to next node in list
     Link* prev;     // Pointer to previous node
 
