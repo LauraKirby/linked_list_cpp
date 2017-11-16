@@ -10,7 +10,7 @@
 #define llist_h
 
 // This is the file to include in your code if you want access to the
-// complete DList template class (update singly linked)
+// complete SList template class
 
 // First, get the declaration for the base list class
 #include "list.h"
@@ -30,7 +30,7 @@ private:
         cnt = 0;
     }
 
-    void removeall() {   // Return link nodes to free store
+    void removeall() {      // Return link nodes to free store
         while(head != NULL) {
             curr = head;
             head = head->next;
@@ -41,9 +41,8 @@ private:
 public:
     LList(int size=defaultSize) { init(); }     // Constructor
     ~LList() { removeall(); }                   // Destructor
-    void print() const;                         // Print list contents
-    void clear() { removeall(); init(); }       // Clear list
 
+    // Include those  methods that are different from singly linked list
     // Insert "it" at current position
     void insert(const E& it) {
         curr->next = new Link<E>(it, curr->next);
@@ -51,8 +50,10 @@ public:
         cnt++;
     }
 
-    void append(const E& it) { // Append "it" to list
-        tail = tail->next = new Link<E>(it, NULL);
+    // Append "it" to the end of the list.
+    void append(const E& it) {
+        tail->prev = tail->prev->next =
+        new Link<E>(it, tail->prev, tail);
         cnt++;
     }
 
@@ -68,15 +69,14 @@ public:
         return it;
     }
 
-    // Place curr at list start
-    void moveToStart()
+    \
+    void moveToStart()      // Place curr at list start
     { curr = head; }
 
-    // Place curr at list end
-    void moveToEnd()
+    void moveToEnd()        // Place curr at list end
     { curr = tail; }
 
-    // Move curr one step left; no change if already at front
+    // Move fence one step left; no change if left is empty
     void prev() {
         if (curr == head) return;       // No previous element
         Link<E>* temp = head;
@@ -85,11 +85,13 @@ public:
         curr = temp;
     }
 
-    // Move curr one step right; no change if already at end
-    void next()
-    { if (curr != tail) curr = curr->next; }
+    void clear() { removeall(); init(); }       // Clear list
 
-    int length() const  { return cnt; } // Return length
+    // Move fence one step right; no change if right is empty
+    void next()
+    { if (curr != tail->prev) curr = curr->next; }
+
+    int length() const  { return cnt; }  // Return length
 
     // Return the position of the current element
     int currPos() const {

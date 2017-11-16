@@ -13,6 +13,7 @@
 template <typename E> class Link {
 private:
     static Link<E>* freelist;       // Reference to freelist head
+
 public:
     E element;      // Value for this node
     Link* next;     // Point to next node in list
@@ -31,7 +32,7 @@ public:
         if (freelist == NULL) return ::new Link;    // Create space
         Link<E>* temp = freelist;                   // Can take from freelist
         freelist = freelist->next;
-        return temp;                                // Return the link
+        return temp;                                 // Return the link
     }
 
     // Overloaded delete operator
