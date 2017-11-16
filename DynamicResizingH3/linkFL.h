@@ -9,7 +9,7 @@
 #ifndef linkFL_h
 #define linkFL_h
 
-// Doubly linked list node with freelist support
+// Doubly linked list node with freelist support (doubly)
 template <typename E> class Link {
 private:
     static Link<E>* freelist;       // Reference to freelist head
