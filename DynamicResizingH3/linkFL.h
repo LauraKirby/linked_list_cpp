@@ -9,7 +9,7 @@
 #ifndef linkFL_h
 #define linkFL_h
 
-// Singly linked list node with freelist support (singly)
+// Singly linked list node with freelist support
 template <typename E> class Link {
 private:
     static Link<E>* freelist;       // Reference to freelist head
