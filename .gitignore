@@ -22,6 +22,7 @@ xcuserdata/
 *.xccheckout
 *.xcscmblueprint
 
+.xcodeproj/project.pbxproj
 
 # C++ objects and libs
 
