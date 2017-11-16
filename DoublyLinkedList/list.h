@@ -46,6 +46,12 @@ public:
     // if already at end.
     virtual void next() = 0;
 
+    // Print each item within the list, starting from the front.
+    virtual void printList() = 0;
+
+    // Print each item within the list, starting from the back.
+    virtual void printListBackward() = 0;
+
     // Return: The number of elements in the list.
     virtual int length() const = 0;
 

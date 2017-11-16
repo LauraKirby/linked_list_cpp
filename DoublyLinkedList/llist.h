@@ -112,6 +112,30 @@ public:
         if(curr->next == tail) return NULL;
         return curr->next->element;
     }
+
+    // Print each element in list
+    void printList() {
+        Link<E>* temp;
+        if (head->next) temp = head->next;
+        while (temp->next){
+            cout << "front to back: ";
+            cout << temp->element << endl;
+
+            temp = temp->next;
+        };
+    }
+
+    // Print each element in list
+    void printListBackward() {
+        Link<E>* temp;
+        if (tail->prev) temp = tail->prev;
+        while (temp->prev){
+            cout << "back to front: ";
+            cout << temp->element << endl;
+
+            temp = temp->prev;
+        };
+    }
 };
 
 #endif /* llist_h */
