@@ -10,7 +10,7 @@
 #define llist_h
 
 // This is the file to include in your code if you want access to the
-// complete DList template class
+// complete DList template class (update)
 
 // First, get the declaration for the base list class
 #include "list.h"
