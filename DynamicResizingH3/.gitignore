@@ -23,6 +23,7 @@ xcuserdata/
 *.xcscmblueprint
 
 DynamicResizing.xcodeproj/*
+DoublyLinkedList.xcodeproj/*
 .xcodeproj/project.pbxproj
 
 
