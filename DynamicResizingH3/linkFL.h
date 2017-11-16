@@ -9,18 +9,27 @@
 #ifndef linkFL_h
 #define linkFL_h
 
-// Singly linked list node with freelist support
+// Doubly linked list link node with freelist support
 template <typename E> class Link {
 private:
-    static Link<E>* freelist; // Reference to freelist head
+    static Link<E>* freelist;       // Reference to freelist head
+
 public:
-    E element;                // Value for this node
-    Link* next;                  // Point to next node in list
+    E element;      // Value for this node
+    Link* next;     // Pointer to next node in list
+    Link* prev;     // Pointer to previous node
 
     // Constructors
-    Link(const E& elemval, Link* nextval =NULL)
-    { element = elemval;  next = nextval; }
-    Link(Link* nextval =NULL) { next = nextval; }
+    Link(const E& it, Link* prevp, Link* nextp) {
+        element = it;
+        prev = prevp;
+        next = nextp;
+    }
+
+    Link(Link* prevp =NULL, Link* nextp =NULL) {
+        prev = prevp;
+        next = nextp;
+    }
 
     void* operator new(size_t) {  // Overloaded new operator
         if (freelist == NULL) return ::new Link; // Create space
@@ -39,5 +48,6 @@ public:
 // The freelist head pointer is actually created here
 template <typename E>
 Link<E>* Link<E>::freelist = NULL;
+
 
 #endif /* linkFL_h */
