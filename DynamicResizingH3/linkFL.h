@@ -9,13 +9,13 @@
 #ifndef linkFL_h
 #define linkFL_h
 
-// Singly linked list node with freelist support
+// Singly linked list node with freelist support (singly)
 template <typename E> class Link {
 private:
     static Link<E>* freelist;       // Reference to freelist head
 public:
     E element;      // Value for this node
-    Link* next;     // Pointer to next node in list
+    Link* next;     // Point to next node in list
 
     // Constructors
     Link(const E& elemval, Link* nextval = NULL) {
