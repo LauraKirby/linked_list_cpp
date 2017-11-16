@@ -23,11 +23,11 @@ using namespace std;
 // Main routine for array-based list driver class
 int main(int argc, char** argv) {
 
-    // 1. Declare an integer linked list.
+    // Declare an integer linked list.
     LList<int> linkedList;
 
 
-    // 2. Add nodes with ints as values to the linked list.
+    // Add nodes with ints as values to the linked list.
     int intArray[3] = {1,2,3};
 
     for (int i = 0; i <= 2; i++ ) {
@@ -35,14 +35,28 @@ int main(int argc, char** argv) {
         cout << "value added to Linked List: " << (intArray[i]) << endl;
     }
 
-    // 3. Declare some sample lists (book examples)
+    // Declare some sample lists (book examples)
     LList<Int*> L1;
     LList<Int*> L2(15);
     LList<Int> L3;
 
-    // 4. Call print functions
+    // Call print functions
     linkedList.printList();
     linkedList.printListBackward();
+
+    // Test DoublyLinkedList, accept input from console and add it to Doubly Linked List
+    string input;
+    LList<string> doublyLinkedList;
+    for (int i = 0; i < 3; i++ ) {
+        cout << "\n\nenter preferred value into console." << endl;
+        cin >> input;
+        doublyLinkedList.insert(input);
+        cout << "value added to Doubly Linked List: " << input << endl;
+    }
+
+    // Print Double Linked List forward and backward
+    doublyLinkedList.printList();
+    doublyLinkedList.printListBackward();
 
     return 0;
 }
