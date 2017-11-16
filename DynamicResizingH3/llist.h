@@ -10,24 +10,23 @@
 #define llist_h
 
 // This is the file to include in your code if you want access to the
-// complete DList template class (update)
+// complete SList template class
 
 // First, get the declaration for the base list class
 #include "list.h"
 
-// This is the declaration for DList. It is broken up because the
+// This is the declaration for LList. It is broken up because the
 // methods that appear in the book are in a separate file.
 // Linked list implementation
 template <typename E> class LList: public List<E> {
 private:
     Link<E>* head;      // Pointer to list header
-    Link<E>* tail;      // Pointer to list tailer
-    Link<E>* curr;      // Pointer ahead of current element
+    Link<E>* tail;      // Pointer to list tail
+    Link<E>* curr;      // Pointer current element
     int cnt;            // Size of list
 
-    void init() {       // Initialization helper method
-        curr = head = new Link<E>;
-        head->next = tail = new Link<E>(head, NULL);
+    void init() {        // Initialization helper method
+        curr = tail = head = new Link<E>;
         cnt = 0;
     }
 
@@ -46,8 +45,8 @@ public:
     // Include those  methods that are different from singly linked list
     // Insert "it" at current position
     void insert(const E& it) {
-        curr->next = curr->next->prev =
-        new Link<E>(it, curr, curr->next);
+        curr->next = new Link<E>(it, curr->next);
+        if (tail == curr) tail = curr->next;    // New tail
         cnt++;
     }
 
@@ -60,27 +59,30 @@ public:
 
     // Remove and return current element
     E remove() {
-        if (curr->next == tail)        // Nothing to remove
-            return NULL;
-        E it = curr->next->element;    // Remember value
-        Link<E>* ltemp = curr->next;   // Remember link node
-        curr->next->next->prev = curr;
-        curr->next = curr->next->next; // Remove from list
-        delete ltemp;                  // Reclaim space
-        cnt--;                         // Decrement cnt
+        Assert(curr->next != NULL, "No element");
+        E it = curr->next->element;             // Remember value
+        Link<E>* ltemp = curr->next;            // Remember link node
+        if (tail == curr->next) tail = curr;    // Reset tail
+        curr->next = curr->next->next;          // Remove from list
+        delete ltemp;                           // Reclaim space
+        cnt--;                                  // Decrement the count
         return it;
     }
 
+    \
     void moveToStart()      // Place curr at list start
     { curr = head; }
 
     void moveToEnd()        // Place curr at list end
-    { curr = tail->prev; }
+    { curr = tail; }
 
     // Move fence one step left; no change if left is empty
     void prev() {
-        if (curr != head)  // Can't back up from list head
-            curr = curr->prev;
+        if (curr == head) return;       // No previous element
+        Link<E>* temp = head;
+        // March down list until we find the previous element
+        while (temp->next!=curr) temp=temp->next;
+        curr = temp;
     }
 
     void clear() { removeall(); init(); }       // Clear list
@@ -109,7 +111,7 @@ public:
 
     // Return current element
     const E& getValue() const {
-        if(curr->next == tail) return NULL;
+        Assert(curr->next != NULL, "No value");
         return curr->next->element;
     }
 };
